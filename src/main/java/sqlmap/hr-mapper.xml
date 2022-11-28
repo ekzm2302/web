@@ -4,9 +4,43 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hr">
 
-<select id='' resultType=''>
 
+<!-- 사원이 소속되어 있는 부서목록 -->
+<select id='department_list' resultType='hr.DepartmentDTO'>
+select distinct department_id, nvl(department_name,'찬재 정예 멤버') department_name
+from employees e left outer join departments d using(department_id)
+order by department_name
 </select>
 
 
+
+<!-- 선택한 사원정보 -->
+<select id='info' resultType='hr.EmployeeDTO'>
+select e.*, e.last_name||' '||e.first_name name, department_name
+		, job_title, m.last_name||' '||m.first_name manager_name   
+from employees e inner join jobs j on e.job_id = j.job_id
+	 left outer join departments d on d.department_id = e.department_id
+	 left outer join employees m on e.manager_id = m.employee_id
+where e.employee_id = #{id} 
+</select>
+
+<!-- 전체사원목록 -->
+<select id='list' resultType='hr.EmployeeDTO'>
+select last_name||' '|| first_name name, department_name
+		, job_title
+		, e.* 
+from employees e left outer join departments d 
+						on e.department_id=d.department_id
+	 inner join jobs j on e.job_id=j.job_id 
+	 <if test='department_id != -1'>
+	 <choose>
+	 	<when test="department_id==0">where e.department_id is null</when>
+	 	<otherwise>where e.department_id = #{department_id}</otherwise>
+	 </choose>
+	 
+	<!--  <if test='department_id == 0'>where e.department_id is null</if> -->
+<!-- <if test='department_id == 0'>where e.department_id = #{department_id} </if>  -->
+</if>
+	order by employee_id 
+</select>
 </mapper>
