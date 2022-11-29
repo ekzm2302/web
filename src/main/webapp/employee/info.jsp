@@ -52,10 +52,22 @@
 		<div class='btnSet'>
 			<button class='btn btn-primary' onclick='location="list.hr"'>사원목록</button>
 			<button class='btn btn-primary' onclick='location="modify.hr?id=${dto.employee_id}"'>정보수정</button>
+			<%-- <button class='btn btn-secondary' onclick='location="delete.hr?id=${dto.employee_id}"'>정보삭제</button> --%>
+			<button class='btn btn-secondary delete'>정보삭제</button>
 		</div>
 	</div>
 </div>
 </div>
+<script>
+$('.delete').on('click',function(){
+	if(confirm('사번 [${dto.employee_id}] 삭제?')) {
+		location='delete.hr?id=${dto.employee_id}';
+	}	
+});
+
+</script>
+
+
 </body>
 </html>
 

@@ -19,7 +19,7 @@
 
 	<!-- Page content-->
 	<div class="container-fluid">
-		<h2 class="mt-4">사원목록</h2>
+		<h2 class="mt-4">사원목록</h2>		
 		<form method='post' action='list.hr'>
 		<div id='list-top' class='w-px900'>
 		<ul>
@@ -32,6 +32,9 @@
 					</c:forEach>
 				</select>
 			</li>
+		</ul>
+		<ul>
+			<li><input onclick='location="new.hr"' type='button' class='btn btn-primary' value='신규등록'></li>
 		</ul>
 		</div>
 		</form>

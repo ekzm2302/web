@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.Command;
+import hr.command.EmployeeCode;
+import hr.command.EmployeeDelete;
 import hr.command.EmployeeInfo;
+import hr.command.EmployeeInsert;
 import hr.command.EmployeeList;
+import hr.command.EmployeeUpdate;
 
 @WebServlet("*.hr")
 public class HrController extends HttpServlet {
@@ -40,9 +44,46 @@ public class HrController extends HttpServlet {
 			
 			view = "employee/info.jsp";
 		} else if(uri.equals("/modify.hr")) {
+			// 정보수정 화면
+			cmd  = new EmployeeInfo();
+			cmd.exec(request, response);
 			
+			// 코드정보요청
+			cmd = new EmployeeCode();
+			cmd.exec(request, response);
 			
 			view = "employee/modify.jsp";
+			
+		} else if( uri.equals("/update.hr")) {
+			// 사원정보변경저장 처리 요청
+			cmd = new EmployeeUpdate();
+			cmd.exec(request, response);
+			
+			view = "info.hr?id=" + request.getParameter("employee_id");
+			redirect = true;
+			
+		} else if (uri.equals("/delete.hr")) {
+			// 선택한 사원정보 삭제처리
+			cmd = new EmployeeDelete();
+			cmd.exec(request, response);
+			
+			view = "list.hr";
+			redirect = true;
+			
+		} else if( uri.equals("/new.hr")) {
+			// 신규사원등록화면 요청
+			cmd = new EmployeeCode();
+			cmd.exec(request, response);
+						
+			view = "employee/new.jsp";
+			
+		} else if(uri.equals("/insert.hr")) {
+			//신규사원등록처리 요청
+			cmd = new EmployeeInsert();
+			cmd.exec(request, response);
+			
+			view = "list.hr";
+			redirect = true;
 		}
 		
 		

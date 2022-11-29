@@ -5,8 +5,10 @@
 <mapper namespace="customer">
 
 
-<!-- 고객 정보 삭제 -->
+<!-- 신규사원 등록 -->
 
+
+<!-- 고객 정보 삭제 -->
 <delete id='delete'>
 	delete from customer where id = #{id}
 </delete>

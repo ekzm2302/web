@@ -1,6 +1,6 @@
 package hr;
 
-import java.util.List;
+import java.util.List; 
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,9 +14,34 @@ public class HrDAO {
 		sql = factory.openSession(true);
 	}
 	
+	//전체 부서목록
+	public List<DepartmentDTO> department_list_all() {
+		connect();
+		List<DepartmentDTO> list = sql.selectList("hr.department_list_all");
+		return list;
+	}
+	
+	// 전체 업무목록
+	public List<JobDTO> job_list_all() {
+		connect();
+		List<JobDTO> list = sql.selectList("hr.job_list_all");
+		return list;
+	}
+	
+	// 관리자로 지정할 전체사원목록
+	public List<ManagerDTO> manager_list_all() {
+		connect();
+		List<ManagerDTO> list = sql.selectList("hr.manager_list_all");
+		return list;
+	}
+	
+	
 	//CRUD(Create, Read, Update, Delete)
 	//신규사원등록
 	public void employee_regist(EmployeeDTO dto){
+		connect();
+		sql.insert("hr.employee_insert", dto);
+		sql.close();
 	}
 	
 	//전체사원목록조회
@@ -50,13 +75,16 @@ public class HrDAO {
 	
 	//선택한 사원정보변경
 	public void employee_update(EmployeeDTO dto) {
-		
+		connect();
+		sql.update("hr.update", dto);
 	}
 	
 	
 	//선택한 사원정보삭제
 	public void employee_delete(int employee_id) {
-		
+		connect();
+		sql.delete("hr.delete", employee_id);
+		sql.close();
 	}
 	
 }
