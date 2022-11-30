@@ -16,6 +16,5 @@
   </environments>
   <mappers>
     <mapper resource="sqlmap/hr-mapper.xml"/>
-    
   </mappers>
 </configuration>

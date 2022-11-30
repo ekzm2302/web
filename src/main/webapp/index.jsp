@@ -20,6 +20,7 @@
                 <!-- Page content-->
                 <div class="container-fluid">
                     <h1 class="mt-4">홈</h1>
+                    <img src="images/home.jpg" style='width:80%'>
 					
 
                 </div>
