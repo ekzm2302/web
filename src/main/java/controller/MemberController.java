@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import common.Command;
 import member.command.MemberLogin;
 import member.command.MemberLogout;
+import member.command.NaverCallback;
+import member.command.NaverLogin;
 
 @WebServlet("*.mb")
 public class MemberController extends HttpServlet {
@@ -18,6 +20,8 @@ public class MemberController extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().removeAttribute("category");
+		request.setAttribute("naver_id", "k5aQKjQS0u5RGlckCcvM");
+		request.setAttribute("naver_secret", "MSJoB9tu0Y");
 		
 		String uri = request.getServletPath();
 		String view = "";
@@ -42,7 +46,23 @@ public class MemberController extends HttpServlet {
 			//Object -> String
 			view = (String)request.getAttribute("url");
 			redirect = true;
+			
+		} else if ( uri.equals("/naverlogin.mb")) {
+			// 네이버 로그인 처리 요청
+			cmd = new NaverLogin();
+			cmd.exec(request, response);
+			
+			view =(String) request.getAttribute("url").toString();
+			redirect = true;			
+			
+		} else if ( uri.equals("/navercallback.mb")) {
+			// 네이버콜백처리 요청
+			cmd = new NaverCallback();
+			cmd.exec(request, response);
+			
+			
 		}
+		
 	
 		if( redirect ) response.sendRedirect(view);
 		else request.getRequestDispatcher(view).forward(request, response);

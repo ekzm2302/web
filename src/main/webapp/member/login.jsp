@@ -10,7 +10,9 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link href="css/styles.css" rel="stylesheet" />
 <link href="css/common.css?<%=new java.util.Date() %>" rel="stylesheet" />
-
+<style>
+.naver { background: url("images/naverlogin.png") center; background-size: cover;}
+</style>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/scripts.js"></script> 
@@ -31,6 +33,8 @@
 			<li><input type='text' class='chk' id='userid' placeholder="아이디"></li>
 			<li><input type='password' class='chk' id='userpw' placeholder="비밀번호"></li>
 			<li><input onclick="fn_login()" class='btn btn-primary' type='button' value='로그인'> </li>
+			<li><hr></li>
+			<li><input class='btn naver' type="button" url='images/naverlogin.png'></li>
 		</ul>
 		</div>
 	</div>
@@ -50,6 +54,12 @@ function emptyCheck(){
 	});
 	return ok;
 }
+
+//네이버 로그인 클릭시
+$('.naver').click(function(){
+	location = 'naverlogin.mb'
+})
+
 	//아이디enter 키를 누를때만 비번으로 커서이동 처리되게
 $('#userid').keypress(function(e){
 	if(e.keyCode==13) $('#userpw').focus();
