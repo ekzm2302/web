@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />        
 <title>Insert title here</title>
 </head>
-<body>
+<body style='background: #c2c5c7;'>
        <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
  			<jsp:include page="include/sidebar.jsp" />
@@ -16,15 +16,17 @@
             <div id="page-content-wrapper">
                 <!-- Top navigation-->
 	 			<jsp:include page="include/navigation.jsp" />
-
+				
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">홈</h1>
-                    <img src="images/home.jpg" style='width:80%'>
+                    <h1 class="mt-4"></h1>
+                    <img src="images/img1.png">
 					
 
                 </div>
             </div>
+       
         </div>
+        
 </body>
 </html>

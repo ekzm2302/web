@@ -12,6 +12,7 @@
 <link href="css/common.css?<%=new java.util.Date() %>" rel="stylesheet" />
 <style>
 .naver { background: url("images/naverlogin.png") center; background-size: cover;}
+.kakao { background: url("images/kakao_login.png") center; background-size: cover;}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -31,10 +32,11 @@
 		<div class='box'>
 		<ul>
 			<li><input type='text' class='chk' id='userid' placeholder="아이디"></li>
-			<li><input type='password' class='chk' id='userpw' placeholder="비밀번호"></li>
+			<li><input type='password' class='chk' id='userpw' placeholder="비밀번호"></li>		
+			<hr>	
 			<li><input onclick="fn_login()" class='btn btn-primary' type='button' value='로그인'> </li>
-			<li><hr></li>
 			<li><input class='btn naver' type="button" url='images/naverlogin.png'></li>
+			<li><input class='btn kakao' type="button" url='images/naverlogin.png'></li>
 		</ul>
 		</div>
 	</div>
@@ -54,6 +56,11 @@ function emptyCheck(){
 	});
 	return ok;
 }
+
+//카카오 로그인 클릭시
+$('.kakao').click(function(){
+	location = 'kokaologin.mb'
+})
 
 //네이버 로그인 클릭시
 $('.naver').click(function(){

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.Command;
+import member.command.KakaoCallback;
+import member.command.KakaoLogin;
 import member.command.MemberLogin;
 import member.command.MemberLogout;
 import member.command.NaverCallback;
@@ -22,6 +24,7 @@ public class MemberController extends HttpServlet {
 		request.getSession().removeAttribute("category");
 		request.setAttribute("naver_id", "k5aQKjQS0u5RGlckCcvM");
 		request.setAttribute("naver_secret", "MSJoB9tu0Y");
+		request.setAttribute("kakao_id", "2c53e5e01abff02c9e5eb20d962f48bb");
 		
 		String uri = request.getServletPath();
 		String view = "";
@@ -52,7 +55,7 @@ public class MemberController extends HttpServlet {
 			cmd = new NaverLogin();
 			cmd.exec(request, response);
 			
-			view =(String) request.getAttribute("url").toString();
+			view =(String) request.getAttribute("url");
 			redirect = true;			
 			
 		} else if ( uri.equals("/navercallback.mb")) {
@@ -60,7 +63,23 @@ public class MemberController extends HttpServlet {
 			cmd = new NaverCallback();
 			cmd.exec(request, response);
 			
+			view = request.getContextPath();
+			redirect = true;
 			
+		} else if( uri.equals("/kokaologin.mb")) {			
+			//카카오로그인처리 요청
+			cmd = new KakaoLogin();
+			cmd.exec(request, response);
+			
+			view = (String)request.getAttribute("url");
+			redirect = true;
+		} else if( uri.equals("/kakaocallback.mb")) {
+			//카카오콜백처리 요청
+			cmd = new KakaoCallback();
+			cmd.exec(request, response);
+			
+			view = request.getContextPath();
+			redirect = true;
 		}
 		
 	
